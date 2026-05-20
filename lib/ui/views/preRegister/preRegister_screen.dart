@@ -58,11 +58,11 @@ class _PreRegisterState extends State<PreRegister> {
                     SizedBox(height: 12,),
                     Row(
                       children: [
-                        SvgPicture.asset("assets/pre-reg.svg", height: 30,color: AppColor.primary,),
+                        SvgPicture.asset("assets/pre-reg-1.svg", height: 36,color: AppColor.primary,),
                         SizedBox(width: 10),
                         Text(
                           "Pre- Registration",
-                          style: TextStyle(fontSize: 32, color: Color(0xFF1B672B)),
+                          style: TextStyle(fontSize: 32, color: Color(0xFF1B672B),fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -74,13 +74,14 @@ class _PreRegisterState extends State<PreRegister> {
                         Icon(Icons.access_time_outlined) : SizedBox.shrink(),
                         SizedBox(width: 6),
                         formatted != null ?
-                        Text("Updated at:", style: TextStyle(fontSize: 16)) : SizedBox.shrink(),
+                        Text("Updated at: ", style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500)) : SizedBox.shrink(),
                         formatted != null ?
                         Text(
                           formatted,
                           style: TextStyle(
                             fontSize: 16,
                             color: AppColor.green,
+                              fontWeight: FontWeight.w500
                           ),
                         ) : SizedBox.shrink(),
                         Spacer(),
@@ -90,7 +91,7 @@ class _PreRegisterState extends State<PreRegister> {
                             SizedBox(width: 6),
                             Text(
                               "Pull down to refresh",
-                              style: TextStyle(fontWeight: FontWeight.w500),
+                              style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,),
                             ),
                           ],
                         ),
@@ -140,7 +141,7 @@ class _PreRegisterState extends State<PreRegister> {
                                         SvgPicture.asset(
                                           controller.labelIcons[controller
                                               .apiData[i]['label']] ??
-                                              "assets/default.svg",
+                                               "assets/category.svg",
                                           color: AppColor.green,
                                           height: 30,
                                         ),
@@ -149,7 +150,7 @@ class _PreRegisterState extends State<PreRegister> {
                                           controller.apiData[i]['label'],
                                           style: TextStyle(
                                             fontSize: 16,
-                                            fontWeight: controller.apiData[i]['label'] == "Total" || i == controller.apiData.length - 1  ? FontWeight.w800 : FontWeight.w400,
+                                            fontWeight: controller.apiData[i]['label'] == "Total" || i == controller.apiData.length - 1  ? FontWeight.w800 : FontWeight.w500,
                                             color:
                                             i == controller.apiData.length - 1
                                                 ? AppColor.green
@@ -240,6 +241,7 @@ class _PreRegisterState extends State<PreRegister> {
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
                           color: textColor,
+
                         ),
                       ),
                     ],
@@ -253,7 +255,7 @@ class _PreRegisterState extends State<PreRegister> {
                       fontWeight:
                       (footer || total)
                           ? FontWeight.w800
-                          : FontWeight.w400,
+                          : FontWeight.w500,
                       color: textColor,
                     ),
                   );

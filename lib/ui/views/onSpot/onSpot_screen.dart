@@ -53,21 +53,21 @@ class _OnSpotScreenState extends State<OnSpotScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: SingleChildScrollView (
+                physics: const AlwaysScrollableScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 12,),
                     Row(
                       children: [
-                        SvgPicture.asset("assets/onSpot.svg", height: 35,color: AppColor.primary,),
+                        SvgPicture.asset("assets/onspot_1.svg", height: 35,color: AppColor.primary,),
                         SizedBox(width: 10),
                         Text(
                           "On-Spot",
-                          style: TextStyle(fontSize: 32, color: Color(0xFF1B672B)),
+                          style: TextStyle(fontSize: 32, color: Color(0xFF1B672B,),fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
-
                     SizedBox(height: 16),
                     Row(
                       children: [
@@ -75,7 +75,7 @@ class _OnSpotScreenState extends State<OnSpotScreen> {
                         Icon(Icons.access_time_outlined) : SizedBox.shrink(),
                         SizedBox(width: 6),
                         formatted != null ?
-                        Text("Updated at:", style: TextStyle(fontSize: 16)) : SizedBox.shrink(),
+                        Text("Updated at: ", style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500)) : SizedBox.shrink(),
                         formatted != null ?
                         Text(
                           formatted,
@@ -91,448 +91,13 @@ class _OnSpotScreenState extends State<OnSpotScreen> {
                             SizedBox(width: 6),
                             Text(
                               "Pull down to refresh",
-                              style: TextStyle(fontWeight: FontWeight.w500),
+                              style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
                             ),
                           ],
                         ),
                       ],
                     ),
-
                     SizedBox(height: 8),
-                    // Container(
-                    //   decoration: BoxDecoration(
-                    //     border: Border.all(),
-                    //     borderRadius: BorderRadius.circular(20),
-                    //   ),
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.all(8.0),
-                    //     child: Column(
-                    //       children: [
-                    //         Container(
-                    //           decoration: BoxDecoration(
-                    //             color: AppColor.green,
-                    //             borderRadius: BorderRadius.circular(10),
-                    //           ),
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.symmetric(
-                    //               horizontal: 12,
-                    //               vertical: 8,
-                    //             ),
-                    //             child: Row(
-                    //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //               children: [
-                    //                 Text(
-                    //                   "Category",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 1",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 2",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 3",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         ),
-                    //         SizedBox(height: 18,),
-                    //         Container(
-                    //           decoration: BoxDecoration(
-                    //             color: AppColor.green,
-                    //             borderRadius: BorderRadius.circular(10),
-                    //           ),
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.symmetric(
-                    //               horizontal: 12,
-                    //               vertical: 8,
-                    //             ),
-                    //             child: Row(
-                    //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //               children: [
-                    //                 Text(
-                    //                   "Total",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 1",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 2",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 3",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         ),
-                    //         SizedBox(height: 18,),
-                    //         Container(
-                    //           decoration: BoxDecoration(
-                    //             color: AppColor.green,
-                    //             borderRadius: BorderRadius.circular(10),
-                    //           ),
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.symmetric(
-                    //               horizontal: 12,
-                    //               vertical: 8,
-                    //             ),
-                    //             child: Row(
-                    //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //               children: [
-                    //                 Text(
-                    //                   "TV",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 1",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 2",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 3",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         ),
-                    //         SizedBox(height: 18,),
-                    //         Container(
-                    //           decoration: BoxDecoration(
-                    //             color: AppColor.green,
-                    //             borderRadius: BorderRadius.circular(10),
-                    //           ),
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.symmetric(
-                    //               horizontal: 12,
-                    //               vertical: 8,
-                    //             ),
-                    //             child: Row(
-                    //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //               children: [
-                    //                 Text(
-                    //                   "PV",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 1",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 2",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 3",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         ),
-                    //         SizedBox(height: 18,),
-                    //         Container(
-                    //           decoration: BoxDecoration(
-                    //             color: AppColor.green,
-                    //             borderRadius: BorderRadius.circular(10),
-                    //           ),
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.symmetric(
-                    //               horizontal: 12,
-                    //               vertical: 8,
-                    //             ),
-                    //             child: Row(
-                    //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //               children: [
-                    //                 Text(
-                    //                   "SI",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 1",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 2",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 3",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         ),
-                    //         SizedBox(height: 18,),
-                    //         Container(
-                    //           decoration: BoxDecoration(
-                    //             color: AppColor.green,
-                    //             borderRadius: BorderRadius.circular(10),
-                    //           ),
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.symmetric(
-                    //               horizontal: 12,
-                    //               vertical: 8,
-                    //             ),
-                    //             child: Row(
-                    //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //               children: [
-                    //                 Text(
-                    //                   "MM",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 1",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 2",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 3",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.white,
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         ),
-                    //
-                    //         SizedBox(height: 18,),
-                    //         Container(
-                    //           decoration: BoxDecoration(
-                    //             border: Border.all(color: AppColor.green),
-                    //             borderRadius: BorderRadius.circular(10),
-                    //           ),
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.symmetric(
-                    //               horizontal: 12,
-                    //               vertical: 8,
-                    //             ),
-                    //             child: Row(
-                    //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //               children: [
-                    //                 Text(
-                    //                   "Category",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.green,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 1",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.green,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 2",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.green,
-                    //                   ),
-                    //                 ),
-                    //                 Text(
-                    //                   "Day 3",
-                    //                   style: TextStyle(
-                    //                     fontSize: 16,
-                    //                     fontWeight: FontWeight.w500,
-                    //                     color: AppColor.green,
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         ),
-                    //
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-
-                    // Container(
-                    //   decoration: BoxDecoration(
-                    //     border: Border.all(color: AppColor.green),
-                    //     borderRadius: BorderRadius.circular(20),
-                    //   ),
-                    //   padding: const EdgeInsets.only(top: 12,right: 12,left: 12),
-                    //   child: Column(
-                    //     children: [
-                    //       Table(
-                    //         border: TableBorder.all(color: Colors.transparent),
-                    //         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                    //         columnWidths: const {
-                    //           0: FlexColumnWidth(2),
-                    //           1: FlexColumnWidth(),
-                    //           2: FlexColumnWidth(),
-                    //           3: FlexColumnWidth(),
-                    //         },
-                    //         children: [
-                    //           _buildRow(["Category", "Day 1", "Day 2", "Day 3"], header: true),
-                    //         ],
-                    //       ),
-                    //       //    const SizedBox(height: 18),
-                    //       Table(
-                    //         columnWidths: const {
-                    //           0: FlexColumnWidth(2),
-                    //           1: FlexColumnWidth(),
-                    //           2: FlexColumnWidth(),
-                    //           3: FlexColumnWidth(),
-                    //         },
-                    //         children: [
-                    //           _buildRow(["Total", "3433", "400", "5444"]),
-                    //           _buildRow(["TV", "500", "200", "400"]),
-                    //           _buildRow(["PV", "300", "400", "200"]),
-                    //           _buildRow(["SI", "300", "400", "400"]),
-                    //           _buildRow(["OR", "300", "200", "100"]),
-                    //           _buildRow(["SM", "300", "200", "100"]),
-                    //           _buildRow(["MM", "700", "600", "300"]),
-                    //         ],
-                    //       ),
-                    //       //    const SizedBox(height: 18),
-                    //       Table(
-                    //         columnWidths: const {
-                    //           0: FlexColumnWidth(2),
-                    //           1: FlexColumnWidth(),
-                    //           2: FlexColumnWidth(),
-                    //           3: FlexColumnWidth(),
-                    //         },
-                    //         children: [
-                    //           _buildRow(["EX", "2000", "349", "100"], footer: true),
-                    //         ],
-                    //       ),
-                    //
-                    //       // Table(
-                    //       //   border: TableBorder.all(color: Colors.transparent),
-                    //       //   columnWidths: const {0: FlexColumnWidth(1)}, // ✅ only one "row container"
-                    //       //   children: [
-                    //       //     _buildRow(["Total", "Day 1", "Day 2", "Day 3"]),
-                    //       //     _buildRow(["TV", "Day 1", "Day 2", "Day 3"]),
-                    //       //     _buildRow(["PV", "Day 1", "Day 2", "Day 3"]),
-                    //       //     _buildRow(["SI", "Day 1", "Day 2", "Day 3"]),
-                    //       //     _buildRow(["MM", "Day 1", "Day 2", "Day 3"]),
-                    //       //   ],
-                    //       // )
-                    //
-                    //     ],
-                    //   ),
-                    // ),
-                    // SizedBox(height: 8),
-
                     Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: AppColor.green),
@@ -617,7 +182,7 @@ class _OnSpotScreenState extends State<OnSpotScreen> {
                                         SvgPicture.asset(
                                           controller.labelIcons[controller
                                               .apiData[i]['label']] ??
-                                              "assets/default.svg",
+                                              "assets/category.svg",
                                           color: AppColor.green,
                                        //   color: i == controller.apiData.length - 1 ? AppColor.green // ✅ footer style: AppColor.white,
                                           height: 30,
@@ -627,7 +192,7 @@ class _OnSpotScreenState extends State<OnSpotScreen> {
                                           controller.apiData[i]['label'],
                                           style: TextStyle(
                                             fontSize: 16,
-                                            fontWeight: controller.apiData[i]['label'] == "Total" || i == controller.apiData.length - 1  ? FontWeight.w800 : FontWeight.w400,
+                                            fontWeight: controller.apiData[i]['label'] == "Total" || i == controller.apiData.length - 1  ? FontWeight.w800 : FontWeight.w500,
                                             // color:
                                             // i ==
                                             //     controller
@@ -783,7 +348,7 @@ class _OnSpotScreenState extends State<OnSpotScreen> {
                         text,
                         style: TextStyle(
                           fontSize: 16,
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.w500,
                           color: textColor,
                         ),
                       ),
@@ -807,7 +372,7 @@ class _OnSpotScreenState extends State<OnSpotScreen> {
                       fontWeight:
                       (footer || total)
                           ? FontWeight.w800
-                          : FontWeight.w400,
+                          : FontWeight.w500,
                       color: textColor,
                     ),
                   );

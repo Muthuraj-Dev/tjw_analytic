@@ -6,9 +6,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:tjw_analytics_new/router.dart';
 import 'package:tjw_analytics_new/services/network_service.dart';
+import 'package:tjw_analytics_new/ui/controller/eventController.dart';
+import 'package:toastification/toastification.dart';
 
 
 import 'core/res/colors.dart';
@@ -39,9 +43,13 @@ Future<void> main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
 
-    setupLocator();
-
+  setupLocator();
   locator<NetworkService>().onInit();
+
+  Get.put(EventController());
+
+  /// ✅ restore saved event
+  await Get.find<EventController>().loadEvent();
 
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
@@ -51,12 +59,18 @@ Future<void> main() async {
   );
 
   // runApp(MyApp());
+
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => MyApp(),
+    const ToastificationWrapper(
+      child: MyApp(),
     ),
   );
+  // runApp(
+  //   DevicePreview(
+  //     enabled: !kReleaseMode,
+  //     builder: (context) => MyApp(),
+  //   ),
+  // );
 }
 
 class MyApp extends StatelessWidget {

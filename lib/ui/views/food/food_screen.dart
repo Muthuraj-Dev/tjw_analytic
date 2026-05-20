@@ -64,6 +64,7 @@ class _FoodScreenState extends State<FoodScreen> {
                           style: TextStyle(
                             fontSize: 32,
                             color: Color(0xFF1B672B),
+                              fontWeight: FontWeight.w500
                           ),
                         ),
                       ],
@@ -76,7 +77,7 @@ class _FoodScreenState extends State<FoodScreen> {
                         Icon(Icons.access_time_outlined) : SizedBox.shrink(),
 
                         SizedBox(width: 6),
-                        Text("Updated at:", style: TextStyle(fontSize: 16)),
+                        Text("Updated at: ", style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500)),
                         formatted != null ?
                         Text(
                           formatted,
@@ -92,7 +93,7 @@ class _FoodScreenState extends State<FoodScreen> {
                             SizedBox(width: 6),
                             Text(
                               "Pull down to refresh",
-                              style: TextStyle(fontWeight: FontWeight.w500),
+                              style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
                             ),
                           ],
                         ),
@@ -112,7 +113,7 @@ class _FoodScreenState extends State<FoodScreen> {
                             children: [
                               SvgPicture.asset("assets/calender.svg",color: AppColor.white,),
                               SizedBox(width: 10,),
-                              Text("Day 3 | Nov 25",style: TextStyle(color: AppColor.white,fontSize: 18),),
+                              Text("Day 3 | Nov 25",style: TextStyle(color: AppColor.white,fontSize: 18,fontWeight: FontWeight.w500),),
                             ],
                           ),
                           SizedBox(height: 30,),
@@ -123,17 +124,17 @@ class _FoodScreenState extends State<FoodScreen> {
                                 children: [
                                   SvgPicture.asset("assets/food_consumed.svg",color: AppColor.white,),
                                   SizedBox(width: 10,),
-                                  Text("Food Consumed",style: TextStyle(color: AppColor.white,fontSize: 18),),
+                                  Text("Food Consumed",style: TextStyle(color: AppColor.white,fontSize: 16,fontWeight: FontWeight.w500),),
                                 ],
                               ),
                               Row(
                                 children: [
-                                  Text("10,000 Plates",style: TextStyle(color: AppColor.white,fontSize: 18),),
+                                  Text("10,000 Plates",style: TextStyle(color: AppColor.white,fontSize: 20,fontWeight: FontWeight.w500),),
                                 ],
                               ),
                             ],
                           ),
-                          SizedBox(height: 14,),
+                          SizedBox(height: 9,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -141,12 +142,12 @@ class _FoodScreenState extends State<FoodScreen> {
                                 children: [
                                   SvgPicture.asset("assets/coffee.svg",color: AppColor.white,),
                                   SizedBox(width: 10,),
-                                  Text("Beverage Consumed",style: TextStyle(color: AppColor.white,fontSize: 18),),
+                                  Text("Beverage Consumed",style: TextStyle(color: AppColor.white,fontSize: 16,fontWeight: FontWeight.w500),),
                                 ],
                               ),
                               Row(
                                 children: [
-                                  Text("10,000 Plates",style: TextStyle(color: AppColor.white,fontSize: 18),),
+                                  Text("10,000 Plates",style: TextStyle(color: AppColor.white,fontSize: 20,fontWeight: FontWeight.w500),),
                                 ],
                               ),
                             ],
@@ -155,117 +156,6 @@ class _FoodScreenState extends State<FoodScreen> {
                       ),
                     ),
                     SizedBox(height: 16),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColor.green),
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      padding: EdgeInsets.all(12),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset("assets/calender.svg",color: AppColor.green,),
-                              SizedBox(width: 10,),
-                              Text("Day 2 | Nov 24",style: TextStyle(color: AppColor.green,fontSize: 18),),
-                            ],
-                          ),
-                          SizedBox(height: 30,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  SvgPicture.asset("assets/food_consumed.svg",color: AppColor.green,),
-                                  SizedBox(width: 10,),
-                                  Text("Food Consumed",style: TextStyle(color: AppColor.green,fontSize: 18),),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text("10,000 Plates",style: TextStyle(color: AppColor.green,fontSize: 18),),
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 14,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  SvgPicture.asset("assets/coffee.svg",color: AppColor.green,),
-                                  SizedBox(width: 10,),
-                                  Text("Beverage Consumed",style: TextStyle(color: AppColor.green,fontSize: 18),),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text("10,000 Plates",style: TextStyle(color: AppColor.green,fontSize: 18),),
-                                ],
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColor.green),
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      padding: EdgeInsets.all(12),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset("assets/calender.svg",color: AppColor.green,),
-                              SizedBox(width: 10,),
-                              Text("Day 1 | Nov 23",style: TextStyle(color: AppColor.green,fontSize: 18),),
-                            ],
-                          ),
-                          SizedBox(height: 30,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  SvgPicture.asset("assets/food_consumed.svg",color: AppColor.green,),
-                                  SizedBox(width: 10,),
-                                  Text("Food Consumed",style: TextStyle(color: AppColor.green,fontSize: 18),),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text("10,000 Plates",style: TextStyle(color: AppColor.green,fontSize: 18),),
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 14,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  SvgPicture.asset("assets/coffee.svg",color: AppColor.green,),
-                                  SizedBox(width: 10,),
-                                  Text("Beverage Consumed",style: TextStyle(color: AppColor.green,fontSize: 18),),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text("10,000 Plates",style: TextStyle(color: AppColor.green,fontSize: 18),),
-                                ],
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-
-                    SizedBox(height: 40),
                   ],
                 ),
               ),

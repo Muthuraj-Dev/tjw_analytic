@@ -5,6 +5,9 @@ import 'package:tjw_analytics_new/core/model/walkInResponse.dart';
 import 'package:tjw_analytics_new/services/api_base_service.dart';
 import 'package:tjw_analytics_new/services/request_method.dart';
 
+import '../../../services/secure_storage_service.dart';
+import '../../controller/eventController.dart';
+
 class OnSpotController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late TabController tabController;
@@ -13,10 +16,13 @@ class OnSpotController extends GetxController
 
   int _selectedIndex = 0;
 
+  final eventController = Get.find<EventController>();
+
+  var eventId = 0;
+
   @override
   void onInit() {
     super.onInit();
-    // 👇 initialize tab controller with number of tabs
     tabController = TabController(length: 8, vsync: this);
 
     tabController.addListener(() {
@@ -24,7 +30,25 @@ class OnSpotController extends GetxController
         _selectedIndex = tabController.index;
       }
     });
-    fetchWalkIns();
+
+
+    /// ✅ listen to event changes
+    ever(eventController.selectedEvent, (event) {
+      if (event != null) {
+        eventId = event.eventID ?? 0;
+        fetchWalkIns();
+      }
+    });
+
+    /// ✅ initial load (if already selected)
+    final event = eventController.selectedEvent.value;
+    if (event != null) {
+      eventId = event.eventID ?? 0;
+      fetchWalkIns();
+    }
+
+    // _initData();
+    // fetchWalkIns();
   }
 
   final Map<String, String> labelIcons = {
@@ -53,7 +77,7 @@ class OnSpotController extends GetxController
 
       final WalkInsResponse response =
       await ApiBaseService.request<WalkInsResponse>(
-        '/Query/WalkIns?EventId=23',
+        '/Query/OnSpotRegistration?EventId=$eventId',
         method: RequestMethod.GET,
         authenticated: false,
       );

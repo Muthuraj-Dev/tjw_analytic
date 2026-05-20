@@ -6,6 +6,8 @@ import 'package:tjw_analytics_new/services/api_base_service.dart';
 import 'package:tjw_analytics_new/services/request_method.dart';
 
 import '../../../core/model/preRegistrationResponse.dart';
+import '../../../services/secure_storage_service.dart';
+import '../../controller/eventController.dart';
 
 class TotalController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -14,6 +16,10 @@ class TotalController extends GetxController
   var isLoading = false.obs;
 
   int _selectedIndex = 0;
+
+  final eventController = Get.find<EventController>();
+
+  var eventId = 0;
 
   @override
   void onInit() {
@@ -26,8 +32,33 @@ class TotalController extends GetxController
         _selectedIndex = tabController.index;
       }
     });
+    // fetchWalkIns();
+    // _initData();
+
+
+    /// ✅ listen to event changes
+    ever(eventController.selectedEvent, (event) {
+      if (event != null) {
+        eventId = event.eventID ?? 0;
+        fetchWalkIns();
+      }
+    });
+
+    /// ✅ initial load (if already selected)
+    final event = eventController.selectedEvent.value;
+    if (event != null) {
+      eventId = event.eventID ?? 0;
+      fetchWalkIns();
+    }
+
+  }
+
+  Future<void> _initData() async {
+    final storedEventId = await SecureStorageService().read("eventId");
+    eventId = int.tryParse(storedEventId ?? "") ?? 0;
     fetchWalkIns();
   }
+
 
   final Map<String, String> labelIcons = {
     "Total": "assets/total1.svg",
@@ -55,7 +86,7 @@ class TotalController extends GetxController
 
       final PreRegistrationResponse response =
       await ApiBaseService.request<PreRegistrationResponse>(
-        '/Query/OverAllRegistration?EventId=23',
+        '/Query/OverAllRegistration?EventId=$eventId',
         method: RequestMethod.GET,
         authenticated: false,
       );

@@ -4,6 +4,9 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:tjw_analytics_new/core/model/walkInResponse.dart';
 import 'package:tjw_analytics_new/services/api_base_service.dart';
 import 'package:tjw_analytics_new/services/request_method.dart';
+import 'package:tjw_analytics_new/ui/controller/eventController.dart';
+
+import '../../../services/secure_storage_service.dart';
 
 class WalkInController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -13,8 +16,12 @@ class WalkInController extends GetxController
 
   int _selectedIndex = 0;
 
+  final eventController = Get.find<EventController>();
+
+  var eventId = 0;
+
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     // 👇 initialize tab controller with number of tabs
     tabController = TabController(length: 8, vsync: this);
@@ -24,8 +31,33 @@ class WalkInController extends GetxController
         _selectedIndex = tabController.index;
       }
     });
-    fetchWalkIns();
+
+    //   fetchWalkIns();
+
+    /// ✅ listen to event changes
+    ever(eventController.selectedEvent, (event) {
+      if (event != null) {
+        eventId = event.eventID ?? 0;
+        fetchWalkIns();
+      }
+    });
+
+    /// ✅ initial load (if already selected)
+    final event = eventController.selectedEvent.value;
+    if (event != null) {
+      eventId = event.eventID ?? 0;
+      fetchWalkIns();
+    }
   }
+
+  var companyTypes = <CompanyTypeData>[
+    CompanyTypeData(id: 1, companyType: 'GJIIF'),
+    CompanyTypeData(id: 2, companyType: 'HIJS'),
+    CompanyTypeData(id: 3, companyType: 'KERALA'),
+    CompanyTypeData(id: 4, companyType: 'TJE'),
+  ].obs;
+
+  var selectedCompanyType = Rxn<CompanyTypeData>();
 
   final Map<String, String> labelIcons = {
     "Total": "assets/total1.svg",
@@ -53,7 +85,7 @@ class WalkInController extends GetxController
 
       final WalkInsResponse response =
           await ApiBaseService.request<WalkInsResponse>(
-            '/Query/WalkIns?EventId=23',
+            '/Query/WalkIns?EventId=$eventId',
             method: RequestMethod.GET,
             authenticated: false,
           );
@@ -99,5 +131,24 @@ class WalkInController extends GetxController
   void onClose() {
     tabController.dispose();
     super.onClose();
+  }
+}
+
+class CompanyTypeData {
+  int? id;
+  String? companyType;
+
+  CompanyTypeData({this.id, this.companyType});
+
+  CompanyTypeData.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    companyType = json['companyType'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['companyType'] = this.companyType;
+    return data;
   }
 }

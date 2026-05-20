@@ -5,93 +5,37 @@ import 'package:tjw_analytics_new/core/model/walkInResponse.dart';
 import 'package:tjw_analytics_new/services/api_base_service.dart';
 import 'package:tjw_analytics_new/services/request_method.dart';
 
+import '../../controller/eventController.dart';
+
 class PreRegisterController extends GetxController{
-  final List<Map<String, dynamic>> eventList = [
-    {
-      'image': 'assets/apgjf.png',
-      'date': '15 Aug - 17 Aug',
-      'time': '10 AM onwards',
-      'location': 'SS Convention Centre, Vijayawada',
-    },
-    {
-      'image': 'assets/hijs.png',
-      'date': '25 Jul - 27 Jul',
-      'time': '7 PM onwards',
-      'location': 'Chennai trade centre, Nandambakkam, Chennai',
-    },
-    {
-      'image': 'assets/gjif_logo.png',
-      'date': '15 Aug - 17 Aug',
-      'time': '10 AM onwards',
-      'location': 'Bombay Exhibition Center, Mumbai',
-    },
-
-    {
-      'image': 'assets/apgjf.png',
-      'date': '15 Aug - 17 Aug',
-      'time': '10 AM onwards',
-      'location': 'SS Convention Centre, Vijayawada',
-    },
-    {
-      'image': 'assets/hijs.png',
-      'date': '25 Jul - 27 Jul',
-      'time': '7 PM onwards',
-      'location': 'Chennai trade centre, Nandambakkam, Chennai',
-    },
-    {
-      'image': 'assets/gjif_logo.png',
-      'date': '15 Aug - 17 Aug',
-      'time': '10 AM onwards',
-      'location': 'Bombay Exhibition Center, Mumbai',
-    },
-
-    {
-      'image': 'assets/apgjf.png',
-      'date': '15 Aug - 17 Aug',
-      'time': '10 AM onwards',
-      'location': 'SS Convention Centre, Vijayawada',
-    },
-    {
-      'image': 'assets/hijs.png',
-      'date': '25 Jul - 27 Jul',
-      'time': '7 PM onwards',
-      'location': 'Chennai trade centre, Nandambakkam, Chennai',
-    },
-    {
-      'image': 'assets/gjif_logo.png',
-      'date': '15 Aug - 17 Aug',
-      'time': '10 AM onwards',
-      'location': 'Bombay Exhibition Center, Mumbai',
-    },
-
-    {
-      'image': 'assets/apgjf.png',
-      'date': '15 Aug - 17 Aug',
-      'time': '10 AM onwards',
-      'location': 'SS Convention Centre, Vijayawada',
-    },
-    {
-      'image': 'assets/hijs.png',
-      'date': '25 Jul - 27 Jul',
-      'time': '7 PM onwards',
-      'location': 'Chennai trade centre, Nandambakkam, Chennai',
-    },
-    {
-      'image': 'assets/gjif_logo.png',
-      'date': '15 Aug - 17 Aug',
-      'time': '10 AM onwards',
-      'location': 'Bombay Exhibition Center, Mumbai',
-    },
-
-  ];
 
   var isLoading = false.obs;
+
+  final eventController = Get.find<EventController>();
+
+  var eventId = 0;
 
   @override
   void onInit() {
     // TODO: implement onInit
 
-    fetchWalkIns();
+
+    /// ✅ listen to event changes
+    ever(eventController.selectedEvent, (event) {
+      if (event != null) {
+        eventId = event.eventID ?? 0;
+        fetchWalkIns();
+      }
+    });
+
+    /// ✅ initial load (if already selected)
+    final event = eventController.selectedEvent.value;
+    if (event != null) {
+      eventId = event.eventID ?? 0;
+      fetchWalkIns();
+    }
+
+    // fetchWalkIns();
     super.onInit();
   }
 
@@ -121,7 +65,7 @@ class PreRegisterController extends GetxController{
 
       final PreRegistrationResponse response =
       await ApiBaseService.request<PreRegistrationResponse>(
-        '/Query/PreRegistration?EventId=23',
+        '/Query/PreRegistration?EventId=$eventId',
         method: RequestMethod.GET,
         authenticated: false,
       );

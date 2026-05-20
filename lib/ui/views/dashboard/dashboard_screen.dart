@@ -228,24 +228,13 @@ class DashboardScreen extends StatelessWidget {
                       onTap: () {
                         print("Logout Session Handle Here");
                        controller.showLogoutDialog(context);
-
-                        // Get.defaultDialog(
-                        //   title: "Logout",
-                        //   middleText: "Are you sure you want to logout?",
-                        //   textCancel: "Cancel",
-                        //   textConfirm: "Logout",
-                        //   confirmTextColor: Colors.white,
-                        //   onConfirm: () async {
-                        //     await controller.logout();
-                        //     Get.back(); // close dialog
-                        //   },
-                        // );
                       },
                       child: Row(
                         children: [
                           SvgPicture.asset(
                             "assets/profileIcon.svg",
                             height: 25,
+                            color: AppColor.green,
                           ),
                           const SizedBox(width: 6),
                           Obx(() {
@@ -253,8 +242,8 @@ class DashboardScreen extends StatelessWidget {
                               controller.userName.value,
                               style: const TextStyle(
                                 fontSize: 18,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff27933E),
+                                fontWeight: FontWeight.w500,
+                                color: AppColor.green,
                               ),
                             );
                           }),
@@ -309,7 +298,7 @@ class DashboardScreen extends StatelessWidget {
       icon: SvgPicture.asset(
         icon,
         height: 30,
-        color: isSelected ? AppColor.green : Colors.black45,
+        color: isSelected ? AppColor.green : Color(0xff4E4E4E),
       ),
       label: label,
     );

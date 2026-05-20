@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:tjw_analytics_new/ui/controller/eventController.dart';
 import 'package:tjw_analytics_new/ui/views/total/total_screen.dart';
-import '../../../common_widget/common_button.dart';
 import '../../../core/res/colors.dart';
 import '../dashboard/dashboard_controller.dart';
+import '../event_list/event_list_screen.dart';
 import '../exhibitor_detail/exhibitor_detail_screen.dart';
 import 'walkIn_controller.dart';
 
@@ -51,48 +52,132 @@ class _WalkInScreenState extends State<WalkInScreen> {
                   horizontal: 16,
                   vertical: 10,
                 ),
-                child: Column(
+                child:
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Obx(() {
+                      final event = controller.eventController.selectedEvent.value;
+
+                      if (event == null) {
+                        return const Text("No event selected");
+                      }
+
+                      return InkWell(
+                        onTap: () {
+                          Get.to(() => EventListScreen());
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: AppColor.white,
+                            border: Border.all(color: AppColor.green),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 88,
+                                height: 65,
+                                decoration: BoxDecoration(
+                                  color: AppColor.green,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Image.network(
+                                    event.eventLogoURL ?? "",
+                                    fit: BoxFit.contain,
+                                    errorBuilder: (_, __, ___) =>
+                                    const Icon(Icons.image),
+                                  ),
+                                ),
+                              ),
+
+                              SizedBox(width: 10),
+
+                              Expanded (
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      event.eventName ?? "",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Text(
+                                      event.eventDate ?? "",
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      event.eventCity ?? "",
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              Icon(Icons.arrow_forward_ios_sharp),
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
+
                     SizedBox(height: 12),
                     Row(
                       children: [
-                        SvgPicture.asset("assets/walk-in.svg", height: 35),
+                        SvgPicture.asset("assets/walkin_1.svg", height: 35),
                         SizedBox(width: 10),
                         Text(
                           "Walk-Ins",
                           style: TextStyle(
                             fontSize: 32,
                             color: Color(0xFF1B672B),
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         Spacer(),
-                        InkWell (
-                          onTap: (){
-                            final dashboardController = Get.find<DashboardController>();
-                            dashboardController.navigatorKeys[0].currentState?.push(
-                              MaterialPageRoute(builder: (_) => TotalScreen()),
-                            );
+                        InkWell(
+                          onTap: () {
+                            final dashboardController =
+                                Get.find<DashboardController>();
+                            dashboardController.navigatorKeys[0].currentState
+                                ?.push(
+                                  MaterialPageRoute(
+                                    builder: (_) => TotalScreen(),
+                                  ),
+                                );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                               color: AppColor.green,
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            padding: EdgeInsets.symmetric(horizontal: 30,vertical: 6),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 30,
+                              vertical: 6,
+                            ),
                             child: Row(
                               children: [
-                                SvgPicture.asset("assets/total.svg",color: AppColor.white,),
-                                SizedBox(width: 10,),
-                                Text("Total",style: TextStyle(fontSize: 20,color: AppColor.white),)
+                                SvgPicture.asset(
+                                  "assets/total.svg",
+                                  color: AppColor.white,
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  "Total",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: AppColor.white,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-                        )
-
-
-
-
+                        ),
                       ],
                     ),
 
@@ -105,8 +190,11 @@ class _WalkInScreenState extends State<WalkInScreen> {
                         SizedBox(width: 6),
                         formatted != null
                             ? Text(
-                              "Updated at:",
-                              style: TextStyle(fontSize: 16),
+                              "Updated at: ",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
                             )
                             : SizedBox.shrink(),
                         formatted != null
@@ -125,7 +213,10 @@ class _WalkInScreenState extends State<WalkInScreen> {
                             SizedBox(width: 6),
                             Text(
                               "Pull down to refresh",
-                              style: TextStyle(fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
                         ),
@@ -187,7 +278,7 @@ class _WalkInScreenState extends State<WalkInScreen> {
                                       children: [
                                         SvgPicture.asset(
                                           controller.labelIcons[controller
-                                              .apiData[i]['label']]!,
+                                              .apiData[i]['label']]?? "",
                                           //     color: i == controller.apiData.length - 1 ? AppColor.green : AppColor.green,
                                           color: AppColor.green,
                                           height: 30,
@@ -197,9 +288,22 @@ class _WalkInScreenState extends State<WalkInScreen> {
                                           controller.apiData[i]['label'],
                                           style: TextStyle(
                                             fontSize: 16,
-                                            fontWeight: controller.apiData[i]['label'] == "Total" || i == controller.apiData.length - 1  ? FontWeight.w800 : FontWeight.w400,
+                                            fontWeight:
+                                                controller.apiData[i]['label'] ==
+                                                            "Total" ||
+                                                        i ==
+                                                            controller
+                                                                    .apiData
+                                                                    .length -
+                                                                1
+                                                    ? FontWeight.w800
+                                                    : FontWeight.w500,
                                             color:
-                                                i == controller.apiData.length - 1
+                                                i ==
+                                                        controller
+                                                                .apiData
+                                                                .length -
+                                                            1
                                                     ? AppColor.green
                                                     : AppColor.green,
                                           ),
@@ -211,7 +315,8 @@ class _WalkInScreenState extends State<WalkInScreen> {
                                     controller.apiData[i]['day3'].toString(),
                                   ],
                                   footer: i == controller.apiData.length - 1,
-                                  total: controller.apiData[i]['label'] == "Total",
+                                  total:
+                                      controller.apiData[i]['label'] == "Total",
                                 ),
                             ],
                           ),
@@ -257,10 +362,7 @@ class _WalkInScreenState extends State<WalkInScreen> {
           child: Container(
             decoration: BoxDecoration(
               color: bgColor,
-              border:
-                  footer
-                      ? null
-                      : Border.all(color: AppColor.green),
+              border: footer ? null : Border.all(color: AppColor.green),
               borderRadius: BorderRadius.circular(10),
             ),
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
@@ -285,7 +387,7 @@ class _WalkInScreenState extends State<WalkInScreen> {
                             text,
                             style: TextStyle(
                               fontSize: 16,
-                              fontWeight: FontWeight.normal,
+                              fontWeight: FontWeight.w500,
                               color: textColor,
                             ),
                           ),
@@ -310,7 +412,7 @@ class _WalkInScreenState extends State<WalkInScreen> {
                           fontWeight:
                               (footer || total)
                                   ? FontWeight.w800
-                                  : FontWeight.w400,
+                                  : FontWeight.w500,
                           color: textColor,
                         ),
                       );

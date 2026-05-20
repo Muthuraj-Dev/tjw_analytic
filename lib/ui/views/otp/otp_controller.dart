@@ -8,6 +8,7 @@ import 'package:tjw_analytics_new/services/request_method.dart';
 import 'package:tjw_analytics_new/ui/views/dashboard/dashboard_screen.dart';
 
 import '../../../services/secure_storage_service.dart';
+import '../event_list/event_list_screen.dart';
 
 class OtpController extends GetxController{
   final data = Get.arguments as Map<String, dynamic>;
@@ -104,7 +105,9 @@ class OtpController extends GetxController{
 
 
         Fluttertoast.showToast(msg: message ?? "OTP Verified");
-        Get.offAll(() => DashboardScreen());
+
+        Get.offAll(() => EventListScreen());
+  //      Get.offAll(() => DashboardScreen());
       } else if (status == "100") {
         Fluttertoast.showToast(msg: message ?? "Something went wrong");
       } else {
