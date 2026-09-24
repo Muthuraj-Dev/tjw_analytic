@@ -65,6 +65,7 @@ class ApiBaseService {
         }
       }
     } on TimeoutException {
+      print('Timeout: no response from $endpoint within ${timeoutDuration.inSeconds}s');
       Fluttertoast.showToast(
           msg: "There is a problem connecting to the server.");
     } catch (exception) {

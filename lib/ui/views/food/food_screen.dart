@@ -140,7 +140,7 @@ class _FoodScreenState extends State<FoodScreen> {
                             children: [
                               Row(
                                 children: [
-                                  SvgPicture.asset("assets/coffee.svg",color: AppColor.white,),
+                                  Icon(Icons.local_cafe_outlined,color: AppColor.white,),
                                   SizedBox(width: 10,),
                                   Text("Beverage Consumed",style: TextStyle(color: AppColor.white,fontSize: 16,fontWeight: FontWeight.w500),),
                                 ],

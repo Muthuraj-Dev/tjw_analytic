@@ -97,8 +97,8 @@ class ExhibitorListController extends GetxController {
 
     filteredList.value =
         exhibitors.where((item) {
-          return item.exhibitingCompany!.toLowerCase().contains(query) ||
-              item.stallNumber!.toLowerCase().contains(query);
+          return (item.exhibitingCompany ?? '').toLowerCase().contains(query) ||
+              (item.stallNumber ?? '').toLowerCase().contains(query);
         }).toList();
   }
 
